@@ -12,12 +12,12 @@ export class NonBlankTitleConstraint implements ValidatorConstraintInterface {
     return typeof value === 'string' && value.trim().length > 0;
   }
 
-  defaultMessage(arguments_: ValidationArguments): string {
-    return `${arguments_.property} must contain at least one non-whitespace character`;
+  defaultMessage(args: ValidationArguments): string {
+    return `${args.property} must contain at least one non-whitespace character`;
   }
 }
 
-/** Ensures a title contains at least one non-whitespace character. */
+/** Adds a class-validator rule for required, non-blank title fields. */
 export function IsNonBlankTitle(validationOptions?: ValidationOptions) {
   return (target: object, propertyName: string): void => {
     registerDecorator({

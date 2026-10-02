@@ -7,17 +7,23 @@ class TitleDto {
 }
 
 describe('IsNonBlankTitle', () => {
-  it.each(['A title', ' title ', 'x'])('accepts a non-blank title: %j', async (title) => {
-    const dto = new TitleDto();
-    dto.title = title;
+  it.each(['A title', ' title ', 'x', '\tname\n']) (
+    'accepts a title containing non-whitespace text: %j',
+    async (title) => {
+      const dto = new TitleDto();
+      dto.title = title;
 
-    await expect(validate(dto)).resolves.toHaveLength(0);
-  });
+      await expect(validate(dto)).resolves.toHaveLength(0);
+    },
+  );
 
-  it.each(['', ' ', '   ', '\t', '\n', ' \t\n '])('rejects a blank title: %j', async (title) => {
-    const dto = new TitleDto();
-    dto.title = title;
+  it.each(['', ' ', '   ', '\t', '\n', '\r', ' \t\n ']) (
+    'rejects a blank title: %j',
+    async (title) => {
+      const dto = new TitleDto();
+      dto.title = title;
 
-    await expect(validate(dto)).resolves.toHaveLength(1);
-  });
+      await expect(validate(dto)).resolves.toHaveLength(1);
+    },
+  );
 });
