@@ -4,8 +4,8 @@ const prisma = new PrismaClient();
 const sampleTodoId = 'development-seed-todo';
 
 async function main(): Promise<void> {
-  if (process.env.NODE_ENV === 'production') {
-    throw new Error('The development seed cannot run in production.');
+  if (process.env.NODE_ENV !== 'development') {
+    throw new Error('The development seed can only run in development.');
   }
 
   await prisma.todo.upsert({
