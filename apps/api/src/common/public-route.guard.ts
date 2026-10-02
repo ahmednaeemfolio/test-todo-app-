@@ -2,7 +2,7 @@ import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { PUBLIC_ROUTE_KEY } from './public.decorator';
 
-/** Allows only routes explicitly marked with the Public decorator. */
+/** Allows requests only when the handler or its controller is explicitly public. */
 @Injectable()
 export class PublicRouteGuard implements CanActivate {
   constructor(private readonly reflector: Reflector) {}
@@ -13,6 +13,6 @@ export class PublicRouteGuard implements CanActivate {
       context.getClass(),
     ]);
 
-    return isPublic === true;
+    return isPublic ?? false;
   }
 }
