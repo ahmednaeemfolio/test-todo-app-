@@ -1,32 +1,34 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 
+const todoSummarySelect = {
+  id: true,
+  title: true,
+  completed: true,
+  createdAt: true,
+  updatedAt: true,
+} as const;
+
+interface TodoSummary {
+  id: string;
+  title: string;
+  completed: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 @Injectable()
 export class ReadTodosService {
   constructor(private readonly prisma: PrismaService) {}
 
-  findAll() {
-    return this.prisma.todo.findMany({
-      select: {
-        id: true,
-        title: true,
-        completed: true,
-        createdAt: true,
-        updatedAt: true,
-      },
-    });
+  findAll(): Promise<TodoSummary[]> {
+    return this.prisma.todo.findMany({ select: todoSummarySelect });
   }
 
-  async findById(id: string) {
+  async findById(id: string): Promise<TodoSummary> {
     const todo = await this.prisma.todo.findUnique({
       where: { id },
-      select: {
-        id: true,
-        title: true,
-        completed: true,
-        createdAt: true,
-        updatedAt: true,
-      },
+      select: todoSummarySelect,
     });
 
     if (!todo) {

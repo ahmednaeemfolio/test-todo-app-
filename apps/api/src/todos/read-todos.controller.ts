@@ -8,13 +8,13 @@ export class ReadTodosController {
 
   @Public()
   @Get()
-  findAll() {
+  findAll(): ReturnType<ReadTodosService['findAll']> {
     return this.readTodosService.findAll();
   }
 
   @Public()
   @Get(':id')
-  findById(@Param('id') id: string) {
+  findById(@Param('id') id: string): ReturnType<ReadTodosService['findById']> {
     return this.readTodosService.findById(id);
   }
 }
