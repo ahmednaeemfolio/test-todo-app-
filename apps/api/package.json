@@ -5,7 +5,8 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "start": "node dist/src/main.js",
-    "start:dev": "ts-node --project tsconfig.json src/main.ts",
+    "dev": "ts-node --project tsconfig.json src/main.ts",
+    "start:dev": "pnpm dev",
     "test": "jest --runInBand",
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },

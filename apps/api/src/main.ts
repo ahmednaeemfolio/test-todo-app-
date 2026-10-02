@@ -1,6 +1,7 @@
 import { UnprocessableEntityException, ValidationPipe } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
-import { AppModule, appConfig } from "./app.config";
+import { AppModule } from "./app.module";
+import { appConfig } from "./app.config";
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
