@@ -8,6 +8,7 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "baseUrl": "./",
+    "resolveJsonModule": true,
     "incremental": false
   },
   "include": ["src/**/*.ts"],

@@ -11,6 +11,7 @@ class BootstrapModule {}
 
 export async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(BootstrapModule);
+  app.enableCors();
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,

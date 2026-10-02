@@ -13,7 +13,7 @@ importers:
   .:
     devDependencies:
       turbo:
-        specifier: ^2.3.3
+        specifier: ^2.5.0
         version: 2.5.0
 
   apps/api:

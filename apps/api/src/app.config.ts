@@ -5,8 +5,9 @@ export interface AppConfig {
 }
 
 function parsePort(value: string | undefined): number {
-  if (!value) return 3001;
-  const port = Number(value);
+  const normalized = value?.trim();
+  if (!normalized) return 3001;
+  const port = Number(normalized);
   if (!Number.isInteger(port) || port < 1 || port > 65535) {
     throw new Error('PORT must be an integer between 1 and 65535');
   }
@@ -15,6 +16,6 @@ function parsePort(value: string | undefined): number {
 
 export const appConfig: Readonly<AppConfig> = Object.freeze({
   port: parsePort(process.env.PORT),
-  nodeEnv: process.env.NODE_ENV ?? 'development',
+  nodeEnv: process.env.NODE_ENV?.trim() || 'development',
   databaseUrl: process.env.DATABASE_URL,
 });

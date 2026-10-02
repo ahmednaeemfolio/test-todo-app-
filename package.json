@@ -10,7 +10,7 @@
     "typecheck": "turbo run typecheck"
   },
   "devDependencies": {
-    "turbo": "^2.3.3"
+    "turbo": "^2.5.0"
   },
   "pnpm": {
     "overrides": {
