@@ -2,6 +2,7 @@ import { Controller, Delete, HttpCode, HttpStatus, Param } from '@nestjs/common'
 import { Public } from '../common/public.decorator';
 import { DeleteTodoService } from './delete-todo.service';
 
+// Keep deletion available through the same public collection API as todo reads.
 @Public()
 @Controller('todos')
 export class DeleteTodoController {
