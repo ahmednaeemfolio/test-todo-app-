@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap");
+
+:root {
+  color-scheme: light;
+  --color-primary: #5146e5;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #e9e8ff;
+  --color-secondary-foreground: #29245f;
+  --color-accent: #ddf5e8;
+  --color-accent-foreground: #155b38;
+  --color-background: #f7f8fa;
+  --color-foreground: #202431;
+  --color-card: #ffffff;
+  --color-card-foreground: #202431;
+  --color-muted: #f0f1f5;
+  --color-muted-foreground: #626879;
+  --color-border: #d9dce5;
+  --color-destructive: #b42332;
+  --color-success: #187447;
+  --color-warning: #8a5200;
+  --color-info: #2457a6;
+  --color-ring: #5146e5;
+  --radius-panel: 14px;
+  --radius-control: 10px;
+  --font-sans: "Geist", Arial, sans-serif;
+  --font-mono: "Geist Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--color-background);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-ring);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--color-secondary);
+  color: var(--color-secondary-foreground);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
