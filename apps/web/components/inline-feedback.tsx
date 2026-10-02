@@ -5,6 +5,7 @@ export type InlineFeedbackVariant = "success" | "error" | "info";
 export interface InlineFeedbackProps {
   variant: InlineFeedbackVariant;
   children?: ReactNode;
+  /** Alternative to children for callers that prefer a named message prop. */
   message?: ReactNode;
 }
 
@@ -32,6 +33,7 @@ const labels: Record<InlineFeedbackVariant, string> = {
   info: "Info:",
 };
 
+/** Announces visible feedback while identifying its kind in text, not color alone. */
 export function InlineFeedback({
   variant,
   children,
@@ -45,6 +47,7 @@ export function InlineFeedback({
       role={isError ? "alert" : "status"}
       aria-live={isError ? "assertive" : "polite"}
       aria-atomic="true"
+      data-variant={variant}
       style={{
         alignItems: "flex-start",
         backgroundColor: feedbackStyles[variant].backgroundColor,

@@ -7,9 +7,11 @@ import type {
 
 export interface TextInputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "id"> {
+  /** A visible label associated with the native input. */
   label: ReactNode;
   id?: string;
   helperText?: ReactNode;
+  /** Validation text is rendered and included in the input's description. */
   error?: ReactNode;
 }
 
@@ -68,6 +70,7 @@ export function TextInput({
         id={inputId}
         aria-invalid={error ? true : undefined}
         aria-describedby={describedByIds || undefined}
+        aria-errormessage={errorId}
         style={{
           ...inputStyle,
           ...(error

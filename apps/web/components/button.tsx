@@ -3,9 +3,10 @@ import type { ButtonHTMLAttributes, CSSProperties, ReactNode } from "react";
 export type ButtonVariant = "primary" | "secondary" | "ghost" | "destructive";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  /** The visible action label. It remains visible while the button is loading. */
   children: ReactNode;
   variant?: ButtonVariant;
-  /** Keeps the button label visible while marking and disabling an in-flight action. */
+  /** Marks an in-flight action and disables further activation. */
   loading?: boolean;
 }
 
@@ -64,11 +65,13 @@ export function Button({
       type={type}
       disabled={isDisabled}
       aria-busy={loading || undefined}
+      data-variant={variant}
       data-loading={loading ? "true" : undefined}
       style={{
         ...baseStyle,
         ...variantStyles[variant],
-        ...(isDisabled ? { cursor: "not-allowed", opacity: 0.72 } : undefined),
+        cursor: isDisabled ? "not-allowed" : "pointer",
+        ...(isDisabled ? { opacity: 0.72 } : undefined),
         ...style,
       }}
     >
