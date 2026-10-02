@@ -1,3 +1,4 @@
+-- Initial table for the shared, unauthenticated Todo collection.
 CREATE TABLE "Todo" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,

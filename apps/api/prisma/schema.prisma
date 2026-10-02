@@ -7,6 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+/// Todos are shared across all users; there is no ownership relation.
 model Todo {
   id        String   @id @default(cuid())
   title     String
