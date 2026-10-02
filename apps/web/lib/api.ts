@@ -9,7 +9,7 @@ export interface Todo {
 export type CreateTodoInput = Pick<Todo, "title">;
 export type PatchTodoInput = Partial<Pick<Todo, "title" | "completed">>;
 
-/** An API failure that retains the HTTP status for caller-specific handling. */
+/** An API failure that retains its HTTP status and response payload for callers. */
 export class TodoApiError extends Error {
   readonly status: number;
   readonly body: unknown;
@@ -23,7 +23,7 @@ export class TodoApiError extends Error {
 }
 
 const apiBaseUrl = (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3000").replace(
-  /\/$/,
+  /\/+$/,
   "",
 );
 
@@ -38,11 +38,26 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   });
 
   if (!response.ok) {
-    const body = await response.json().catch(() => undefined);
-    const message =
+    const rawBody = await response.text().catch(() => "");
+    let body: unknown = rawBody || undefined;
+    try {
+      body = JSON.parse(rawBody);
+    } catch {
+      // Keep non-JSON error responses available to callers as their raw text.
+    }
+
+    const responseMessage =
       body && typeof body === "object" && "message" in body
-        ? String(body.message)
+        ? body.message
+        : typeof body === "string"
+          ? body
+          : undefined;
+    const message = Array.isArray(responseMessage)
+      ? responseMessage.join(", ")
+      : responseMessage !== undefined
+        ? String(responseMessage)
         : response.statusText || "The request could not be completed.";
+
     throw new TodoApiError(response.status, message, body);
   }
 
