@@ -1,6 +1,10 @@
 import { IsBoolean, IsString, ValidateIf } from "class-validator";
 
-/** Fields that may be changed independently on an existing todo. */
+/**
+ * Partial update payload. Missing properties are allowed; values that are
+ * supplied must have the correct type. The service applies title trimming and
+ * the 400 response for an empty-after-trimming title.
+ */
 export class UpdateTodoDto {
   @ValidateIf((_object, value) => value !== undefined)
   @IsString()

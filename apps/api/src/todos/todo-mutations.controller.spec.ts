@@ -1,4 +1,4 @@
-import { BadRequestException } from "@nestjs/common";
+import { BadRequestException, NotFoundException } from "@nestjs/common";
 import { TodoMutationsController } from "./todo-mutations.controller";
 import { TodoMutationsService } from "./todo-mutations.service";
 import { UpdateTodoDto } from "./update-todo.dto";
@@ -43,18 +43,28 @@ describe("TodoMutationsController", () => {
   });
 
   it("rejects an empty or whitespace-only edited title", async () => {
+    const dto: UpdateTodoDto = { title: "  \t " };
     mutations.update.mockRejectedValue(new BadRequestException("Title must not be empty"));
 
-    await expect(controller.update("todo-1", { title: "  \t " })).rejects.toBeInstanceOf(
+    await expect(controller.update("todo-1", dto)).rejects.toBeInstanceOf(
       BadRequestException,
     );
-    expect(mutations.update).toHaveBeenCalledWith("todo-1", { title: "  \t " });
+    expect(mutations.update).toHaveBeenCalledWith("todo-1", dto);
   });
 
-  it("performs deletion when called for a client-confirmed delete and returns no content", async () => {
+  it("performs deletion after the client has confirmed and returns no content", async () => {
     mutations.remove.mockResolvedValue(undefined);
 
     await expect(controller.remove("todo-1")).resolves.toBeUndefined();
     expect(mutations.remove).toHaveBeenCalledWith("todo-1");
+  });
+
+  it("returns not found when deleting an unknown todo", async () => {
+    mutations.remove.mockRejectedValue(new NotFoundException("Todo not found"));
+
+    await expect(controller.remove("missing")).rejects.toBeInstanceOf(
+      NotFoundException,
+    );
+    expect(mutations.remove).toHaveBeenCalledWith("missing");
   });
 });

@@ -3,6 +3,7 @@ import { PrismaModule } from "../prisma/prisma.module";
 import { TodoMutationsController } from "./todo-mutations.controller";
 import { TodoMutationsService } from "./todo-mutations.service";
 
+/** Provides the todo update/delete endpoints and their persistence service. */
 @Module({
   imports: [PrismaModule],
   controllers: [TodoMutationsController],

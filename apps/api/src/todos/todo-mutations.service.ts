@@ -39,6 +39,7 @@ export class TodoMutationsService {
 
   async remove(id: string): Promise<void> {
     try {
+      // Prisma delete persists the removal and reports a missing id as P2025.
       await this.prisma.todo.delete({ where: { id } });
     } catch (error) {
       if (this.isRecordNotFound(error)) {

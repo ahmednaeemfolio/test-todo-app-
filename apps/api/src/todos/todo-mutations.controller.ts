@@ -19,6 +19,7 @@ export class TodoMutationsController {
     return this.todoMutationsService.update(id, updateTodoDto);
   }
 
+  /** This endpoint performs deletion; the client must request it after confirmation. */
   @Delete(":id")
   @HttpCode(HttpStatus.NO_CONTENT)
   async remove(@Param("id") id: string): Promise<void> {
