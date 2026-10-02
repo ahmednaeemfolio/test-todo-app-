@@ -6,9 +6,11 @@ export class CreateTodoService {
   constructor(private readonly prisma: PrismaService) {}
 
   create(title: string) {
+    const normalizedTitle = title.trim();
+
     return this.prisma.todo.create({
       data: {
-        title: title.trim(),
+        title: normalizedTitle,
         completed: false,
       },
     });
