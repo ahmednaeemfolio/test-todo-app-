@@ -1,3 +1,4 @@
+-- Todo title trimming and blank-title rejection are enforced by the API layer.
 CREATE TABLE "Todo" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,

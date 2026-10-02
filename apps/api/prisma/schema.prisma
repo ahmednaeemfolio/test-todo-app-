@@ -9,6 +9,7 @@ datasource db {
 
 model Todo {
   id        String   @id @default(cuid())
+  // Trimming and rejection of blank titles are enforced by the API layer.
   title     String
   completed Boolean  @default(false)
   createdAt DateTime @default(now())
