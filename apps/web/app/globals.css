@@ -1,0 +1,241 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap");
+
+:root {
+  color-scheme: light;
+  --color-primary: #5146e5;
+  --color-primary-hover: #4338ca;
+  --color-secondary: #e9e8ff;
+  --color-accent: #ddf5e8;
+  --color-background: #f7f8fa;
+  --color-foreground: #202431;
+  --color-card: #ffffff;
+  --color-muted: #f0f1f5;
+  --color-muted-foreground: #626879;
+  --color-border: #d9dce5;
+  --color-destructive: #b42332;
+  --color-success: #187447;
+  --color-warning: #8a5200;
+  --color-info: #2457a6;
+  --color-ring: #5146e5;
+  --radius-panel: 14px;
+  --radius-control: 10px;
+  --shadow-panel: 0 1px 3px rgba(32, 36, 49, 0.06);
+  --font-sans: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--color-background);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+textarea,
+select {
+  color: inherit;
+  font: inherit;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+a {
+  color: var(--color-primary);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-ring);
+  outline-offset: 3px;
+}
+
+.app-shell {
+  width: min(100% - 48px, 720px);
+  margin: 0 auto;
+  padding: 48px 0 80px;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  margin-bottom: 40px;
+}
+
+.wordmark {
+  color: var(--color-foreground);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+
+.content-column {
+  width: 100%;
+  min-width: 0;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  line-height: 40px;
+}
+
+.section-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 28px;
+}
+
+.panel {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-panel);
+  background: var(--color-card);
+  box-shadow: var(--shadow-panel);
+}
+
+.text-input {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+  background: var(--color-card);
+  padding: 11px 14px;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.text-input::placeholder {
+  color: var(--color-muted-foreground);
+  opacity: 1;
+}
+
+.text-input[aria-invalid="true"] {
+  border-color: var(--color-destructive);
+}
+
+.button {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-control);
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease;
+}
+
+.button-primary {
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+.button-primary:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+}
+
+.button-secondary {
+  border-color: var(--color-border);
+  background: var(--color-card);
+  color: var(--color-foreground);
+}
+
+.button-secondary:hover:not(:disabled) {
+  background: var(--color-muted);
+}
+
+.button-destructive {
+  background: var(--color-destructive);
+  color: #ffffff;
+}
+
+.button-destructive:hover:not(:disabled) {
+  background: #941d2a;
+}
+
+.muted-text {
+  color: var(--color-muted-foreground);
+}
+
+.status-success {
+  color: var(--color-success);
+}
+
+.todo-row {
+  transition: background-color 180ms ease, border-color 180ms ease;
+}
+
+@media (max-width: 767px) {
+  .app-shell {
+    width: min(100% - 32px, 720px);
+    padding-top: 28px;
+    padding-bottom: 48px;
+  }
+
+  .site-header {
+    margin-bottom: 32px;
+  }
+}
+
+@media (max-width: 400px) {
+  .app-shell {
+    width: calc(100% - 28px);
+    padding-top: 24px;
+  }
+
+  .page-title {
+    font-size: 28px;
+    line-height: 36px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
