@@ -28,7 +28,7 @@ export class ApiError extends Error {
   }
 }
 
-const configuredBaseUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001";
+const configuredBaseUrl = (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001").trim();
 const baseUrl = configuredBaseUrl.replace(/\/+$/, "");
 
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {

@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Todo App — Shared List",
+  title: "Todo App | Shared todo list",
   description: "A simple shared list for the things you need to do.",
 };
 

@@ -2,6 +2,7 @@
   "name": "web",
   "private": true,
   "type": "module",
+  "description": "The shared Todo App web client.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
