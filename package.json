@@ -1,0 +1,20 @@
+{
+  "name": "todo-app",
+  "private": true,
+  "packageManager": "pnpm@9.15.4",
+  "scripts": {
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.3"
+  },
+  "pnpm": {
+    "overrides": {
+      "path-to-regexp": "^0.1.12",
+      "cookie": "^0.7.2",
+      "body-parser": "^1.20.3"
+    }
+  }
+}
