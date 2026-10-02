@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common";
 import { PrismaService } from "../prisma/prisma.service";
 
 @Injectable()
@@ -6,14 +10,15 @@ export class TodosService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(title: string) {
-    const trimmedTitle = title.trim();
-    if (trimmedTitle.length === 0) {
+    // Keep this guard here as well as DTO transformation so direct service
+    // callers cannot persist a blank title.
+    if (typeof title !== "string" || title.trim().length === 0) {
       throw new BadRequestException("Todo title must not be empty");
     }
 
     return this.prisma.todo.create({
       data: {
-        title: trimmedTitle,
+        title: title.trim(),
         completed: false,
       },
     });

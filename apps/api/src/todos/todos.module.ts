@@ -3,6 +3,7 @@ import { PrismaModule } from "../prisma/prisma.module";
 import { TodosController } from "./todos.controller";
 import { TodosService } from "./todos.service";
 
+// The shared Todo endpoints use the Prisma-backed service without user scope.
 @Module({
   imports: [PrismaModule],
   controllers: [TodosController],

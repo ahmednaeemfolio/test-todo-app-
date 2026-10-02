@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+} from "@nestjs/common";
 import { CreateTodoDto } from "./create-todo.dto";
 import { TodosService } from "./todos.service";
 
@@ -7,6 +15,7 @@ export class TodosController {
   constructor(private readonly todosService: TodosService) {}
 
   @Post()
+  @HttpCode(HttpStatus.CREATED)
   create(@Body() createTodoDto: CreateTodoDto) {
     return this.todosService.create(createTodoDto.title);
   }
